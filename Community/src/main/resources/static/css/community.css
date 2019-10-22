@@ -1,0 +1,122 @@
+.main {
+    margin: 30px;
+    background-color: white;
+}
+
+body {
+    background-color: #efefef;
+}
+
+.btn-publish {
+    float: right;
+    margin-bottom: 15px;
+}
+
+.media-object {
+    width: 38px;
+    height: 38px;
+}
+
+.media-heading {
+    padding-top: 5px;
+}
+
+.text_desc {
+    font-size: 12px;
+    font-weight: normal;
+    color: #999999;
+}
+
+.badge {
+    background-color: red;
+}
+
+.list-group {
+    margin-top: 16px;
+}
+
+.error {
+    font-size: 16px;
+    color: red;
+}
+
+.community-menu {
+    color: #999;
+    font-size: 13px;
+}
+
+.jumbotron {
+    margin: 30px;
+}
+
+.comment {
+    margin: 10px 0px;
+}
+
+#comment {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.btn-comment {
+    float: right;
+    margin-bottom: 10px;
+}
+
+#question_sq {
+    margin-top: 0px;
+}
+
+.menu {
+    color: #999999;
+    margin-top: 5px;
+}
+.question-tag{
+    margin-right: 5px;
+}
+.menu .icon {
+    margin-right: 6px;
+    font-size: 15px;
+    cursor: pointer;
+}
+.menu .comment-icon{
+    font-size: 15px;
+    cursor: pointer;
+}
+.menu .comment-icon:hover {
+    color: #499ef3;
+}
+.menu .icon:hover {
+    color: #499ef3;
+}
+.blueColor{
+    color: #499ef3;
+}
+
+.subComment{
+    border: 1px solid #eee;
+    padding-top: 30px;
+    padding-bottom: 16px;
+    border-radius: 5px;
+    margin-bottom: 16px;
+}
+.subComment .btn{
+    margin: 10px;
+}
+.relatedQuestions{
+    list-style: none;
+    cursor: pointer;
+    text-decoration: none;
+    padding-left: 0px;
+    font-size: 14px;
+    line-height: 26px;
+}
+.image-weChat{
+    height: 300px;
+}
+.tag-tab{
+    display: none;
+    margin-top: 10px;
+
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script src="/jquery-3.4.1.min.js"></script>
+<link>
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+    <title>错误页面-国鑫社区</title>
+<script th:src="@{/jquery-3.4.1.min.js}" type="application/javascript"></script>
+<script th:src="@{/js/bootstrap.min.js}" type="application/javascript"></script>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+<link th:href="@{/css/bootstrap-theme.min.css}" rel="stylesheet" type="text/css"/>
+<link th:href="@{/css/community.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="container-fluid main">
+    <div class="jumbotron">
+        <h1>出错啦！！！</h1>
+        <p th:text="${message}"></p>
+        <p><a class="btn btn-primary btn-lg" href="/" role="button">回到主页</a></p>
+    </div>
+</div>
+</body>
+</html>
