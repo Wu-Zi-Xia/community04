@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<title th:text="${sectionName}"></title>
+<script th:src="@{/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}" type="application/javascript"></script>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+<link th:href="@{/css/bootstrap-theme.min.css}" rel="stylesheet" type="text/css"/>
+<link th:href="@{/css/community.css}" rel="stylesheet" type="text/css"/>
+
+
+
+
+</head>
+<body>
+<div th:insert="~{navigation::nav}"></div><!--引入重复的导航栏前端代码文件-->
+<!--主要问题栏-->
+<div class="container-fluid main">
+    <div class="row">
+        <!--左边栏主要内容-->
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+<!--            我的问题主要内容-->
+            <h2><span th:text="${sectionName}"></span></h2>
+            <div th:if="${section=='question'}">
+                <div th:if="${error==null}">
+                    <!--                循环输出问题列表-->
+                    <div  class="media" th:each="question:${paginationDTO.data}"><!--循环class为medis这个层的内容-->
+                       <hr>
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object img-rounded" th:src="${question.userModel.avatarUrl}">
+                            </a>
+                        </div>
+
+                        <div  class="media-body">
+                            <h4 class="media-heading" >
+                                <a th:href="@{/question(id=${question.getId()})}" th:text="${question.title}"></a>
+                            </h4>
+                            <span th:text="${question.description}"></span>
+                            <span class="text_desc" >
+                            <span th:text="${question.viewCount}"></span>
+                            浏览~
+                            <span th:text="${question.commentCount}"></span>
+                            回复~
+                            <span th:text="${#dates.format(question.gmtCreate,'YYYY-MM-dd HH:mm')}"></span>
+                            发布~
+                            <a th:if="${session!=null&&session.userModel.get(0).getToken()==question.userModel.getToken()}"
+                               class="community-menu"
+                               th:href="@{/publishUpdate(id=${question.getId()})}">
+                                <span class="community-menu glyphicon glyphicon-pencil">快速编辑</span>
+                            </a>
+                        </span>
+                        </div>
+                    </div><!--循环class为medis这个层的内容结束-->
+                    <!--                分页内容主要内容-->
+                    <nav th:if="${error==null}" aria-label="Page navigation"><!--分页控件开始-->
+                        <ul class="pagination">
+                            <li th:if="${paginationDTO.isShowFirstPage()}">
+                                <a th:href="@{/profile/question(page=1)}" aria-label="First">
+                                    <span aria-hidden="true">&lt;&lt;</span>
+                                </a>
+                            </li>
+                            <li th:if="${paginationDTO.isShowPrevious()}">
+                                <a th:href="@{/profile/question(page=${paginationDTO.getPage()}-1)}" aria-label="Previous">
+                                    <span aria-hidden="true">&lt;</span>
+                                </a>
+                            </li>
+
+                            <li th:each="page:${paginationDTO.pages}" th:class="${paginationDTO.page==page?'active':''}">
+                                <a   th:href="@{/profile/question(page=${page})}" th:text="${page}">
+
+                                </a>
+                            </li>
+
+                            <li th:if="${paginationDTO.isShowNext()}">
+                                <a th:href="@{/profile/question(page=${paginationDTO.getPage()}+1)}" aria-label="Next">
+                                    <span aria-hidden="true">&gt;</span>
+                                </a>
+                            </li>
+                            <li th:if="${paginationDTO.isShowEndPage()}">
+                                <a th:href="@{/profile/question(page=${paginationDTO.totalPage})}" aria-label="End">
+                                    <span aria-hidden="true">&gt;&gt;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav><!--分页控件结束-->
+                </div>
+            </div>
+
+
+<!--            我的回复主要内容-->
+            <div th:if="${section=='replies'}">
+                <div th:if="${error==null}">
+                    <!--                循环输出回复列表-->
+                    <div  class="media" th:each="notification:${paginationDTO.data}">
+                        <hr>
+                        <span th:text="${notification.getNotifierName()}"></span>
+                        <span th:text="${notification.getTypeName()}"></span>
+                        <a th:href="@{'/notification?id='+${notification.getId()}}">
+                            <span th:text="${notification.getOuterTitle()}"></span>
+                        </a>
+                    <span class="label label-danger" th:if="${notification.getStatus()==0}">未读</span>
+                    </div>
+                    <!--分页控件主要内容-->
+                    <nav aria-label="Page navigation"><!--分页控件开始-->
+                        <ul class="pagination">
+                            <li th:if="${paginationDTO.isShowFirstPage()}">
+                                <a th:href="@{/profile/replies(page=1)}" aria-label="First">
+                                    <span aria-hidden="true">&lt;&lt;</span>
+                                </a>
+                            </li>
+                            <li th:if="${paginationDTO.isShowPrevious()}">
+                                <a th:href="@{/profile/replies(page=${paginationDTO.getPage()}-1)}" aria-label="Previous">
+                                    <span aria-hidden="true">&lt;</span>
+                                </a>
+                            </li>
+
+                            <li th:each="page:${paginationDTO.pages}" th:class="${paginationDTO.page==page?'active':''}">
+                                <a   th:href="@{/profile/replies(page=${page})}" th:text="${page}">
+
+                                </a>
+                            </li>
+
+                            <li th:if="${paginationDTO.isShowNext()}">
+                                <a th:href="@{/profile/replies(page=${paginationDTO.getPage()}+1)}" aria-label="Next">
+                                    <span aria-hidden="true">&gt;</span>
+                                </a>
+                            </li>
+                            <li th:if="${paginationDTO.isShowEndPage()}">
+                                <a th:href="@{/profile/replies(page=${paginationDTO.totalPage})}" aria-label="End">
+                                    <span aria-hidden="true">&gt;&gt;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!--分页控件结束-->
+                 </div>
+                <span th:if="${error!=null}" th:text="${error}"></span>
+            </div>
+        </div>
+
+
+<!--右边栏主要内容-->
+        <div class="col-lg-3 col-md-12  col-sm-12 col-xs-12">
+            <div class="list-group">
+                <a href="/profile/question" th:class="${section=='question'?'active list-group-item':'list-group-item'}">我的问题</a>
+                <a href="/profile/replies"  th:class="${section=='replies'?'active list-group-item':'list-group-item'}">最新回复  <span class="badge" th:if="${session.unreadCount!=0}" th:text="${session.unreadCount}"></span></a>
+<!--                <span class="badge" th:text="${unreadCount}"></span>-->
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
