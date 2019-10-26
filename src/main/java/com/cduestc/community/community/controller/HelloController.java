@@ -8,17 +8,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Controller
+@RestController
 public class HelloController {
     @Autowired
     UserMapper userMapper;
     @Autowired
     QuestionService questionService;
     String error=null;
-    @RequestMapping("/")
+    @RequestMapping("hello")
     public String hello(HttpServletRequest request,
                         Model model,
                         @RequestParam(value = "page",defaultValue = "1") Integer page,
